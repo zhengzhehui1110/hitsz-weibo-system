@@ -1,0 +1,6 @@
+/* 垂直居中纵向排列 */
+.flex_col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
