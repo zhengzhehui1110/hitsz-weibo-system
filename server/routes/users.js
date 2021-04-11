@@ -9,7 +9,6 @@ var errHandler = require('../global/errHandler')
 // });
 
 router.get('/test', function(req, res, next) {
-  // res.send('网络测试正常');
   errHandler(!req, '网络测试正常', res)
 });
 
