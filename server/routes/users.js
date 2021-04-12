@@ -14,12 +14,6 @@ router.get('/test', function(req, res, next) {
 
  // 用户注册
 router.post('/signup',(req,res,next)=>{
-  // var user = new User({
-  //        username:'admin',
-  //        password:'123'
-  //    });
-  // console.log('post signup', req.body);
-
   var user = new User({
     ...req.body
   })
@@ -27,8 +21,33 @@ router.post('/signup',(req,res,next)=>{
   console.log('new user:', user)
 
   user.save((err)=>{
-    errHandler(err, 'data test', res)
+    errHandler(err, user, res)
   })
+})
+
+// 用户登录
+router.post('/login',(req,res,next)=>{
+  let userInfo = req.body
+
+  User.findOne(
+    {
+      $or: [
+        {
+          'email': userInfo.user
+        },
+        {
+          'mobile': userInfo.user
+        }
+      ]
+    }
+  ).exec((error,result)=>{
+    // 不知为啥error无论如何都是null
+    console.log('login find:', error, result);
+    if (!result) errHandler(!result, result, res, '该用户不存在')
+    else if (result.password !== userInfo.password) errHandler(result, result, res, '密码错误')
+    else errHandler(error, result, res)
+  })
+
 })
 
 module.exports = router;

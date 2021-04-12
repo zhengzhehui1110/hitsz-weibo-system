@@ -150,7 +150,9 @@
             async submitLogin() { // 提交登录
                 if (!await this.$refs.login.validate()) return
                 // console.log('check log in', check);
+                if (!await this.axios.post(this.$url.user.logIn, this.loginData)) return
                 // 登陆成功，跳转到主页
+                this.$refs.login.clear()
                 this.$router.push({
                     name: 'Home'
                 })
@@ -159,8 +161,10 @@
                 if (!await this.$refs.sign_up.validate()) return
                 console.log('check sign up');
                 // await this.$httpHandler.post(this.$url.user.signUp, this.signUpData)
-                await this.axios.post(this.$url.user.signUp, this.signUpData)
-                // if (res && res.code === 'e0000') 
+                if (!await this.axios.post(this.$url.user.signUp, this.signUpData)) return
+                this.$toast.success('注册成功')
+                this.$refs.sign_up.clear()
+                this.isLogin = 0
             },
         },
 

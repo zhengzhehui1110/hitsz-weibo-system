@@ -16,8 +16,8 @@ var my_axios = axios.create(axiosConfig)
 my_axios.interceptors.response.use(
     function (res) {
         console.log('收到请求', res.data);
-        if(res.data.code!=='e0000') {
-            vm.$toast.error(res.errMsg || res.code || '数据出错了')
+        if(!res.data || res.data.code!=='e0000') {
+            vm.$toast.error((res.data && res.data.errMsg) || (res.data && res.data.code) || '数据出错了')
             return Promise.reject(res)
         }
         return res
@@ -32,7 +32,7 @@ export var _axios = my_axios;
 export const url = { // 后端请求url路由名称集合
     user: {
         signUp: 'users/signup',
-        logIn: '',
+        logIn: 'users/login',
         editInfo: '',
     }
 }

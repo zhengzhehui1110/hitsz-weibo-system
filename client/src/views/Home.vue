@@ -36,7 +36,6 @@
       <div>test1</div>
       <div>test1</div>
       <div>test1</div>
-      <div>test1</div>
     </PageContainer>
 
   </div>
@@ -55,7 +54,7 @@
     },
     computed: {},
     created() {
-      this.axios.get('users')
+      // this.axios.get('users')
     },
     methods: {
 
