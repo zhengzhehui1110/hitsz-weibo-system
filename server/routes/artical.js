@@ -25,7 +25,7 @@ router.post('/post', async (req, res, next)=>{
         console.log('new artical:', artical);
 
         artical.save((err)=>{
-            errHandler(req.body, artical, res)
+            errHandler(err, artical, res)
         })
     }
     else {

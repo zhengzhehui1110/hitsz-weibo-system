@@ -153,7 +153,7 @@
                 if (!res) return
                 // 登陆成功，跳转到主页
                 this.$user.setInfo(res.data.data) // 用户信息存储在sessionStorage
-                this.$refs.login.clear()
+                this.clearFormMsg()
                 this.$router.push({ // 跳转到首页，默认先展示全部动态页
                     path: 'home/articals'
                 })
@@ -164,7 +164,7 @@
                 // await this.$httpHandler.post(this.$url.user.signUp, this.signUpData)
                 if (!await this.axios.post(this.$url.user.signUp, this.signUpData)) return
                 this.$toast.success('注册成功')
-                this.$refs.sign_up.clear()
+                this.clearFormMsg()
                 this.signUpData = {
                     userName: '',
                     email: '',

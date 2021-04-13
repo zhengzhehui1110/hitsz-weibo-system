@@ -14,6 +14,19 @@ import './global/global.css' // 全局样式文件
 import {_axios, url} from './http/config' // axios全局配置
 import {localUserInfo} from '@/global/localUserInfo'
 import './components/index' // 全局组件自动注册
+// import theme from 'muse-ui/lib/theme';
+
+// theme.use('dark');
+// theme.add('teal', {
+//   primary: '#009688',
+//   secondary: '#ff4081',
+//   success: '#4caf50',
+//   warning: '#ffeb3b',
+// }, 'light');
+
+// theme.use('teal');
+
+// MuseUI.theme.add('carbon', carbon).addCreateTheme(createTheme).use('carbon');
 
 Vue.use(MuseUI);
 Vue.use(Message);

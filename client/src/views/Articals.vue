@@ -1,9 +1,13 @@
 <template>
     <div>
-        <h1>articals</h1>
-        <div v-for="item in articals" :key="item._id">
-            {{item}}
-        </div>
+        <mu-container>
+            <!-- <h1>articals</h1> -->
+        </mu-container>
+        <mu-scale-transition v-for="item in articals" :key="item._id">
+            <ArticalCard v-show="show" :artical="item"></ArticalCard>
+
+        </mu-scale-transition>
+        <!-- <ArticalCard v-for="item in articals" :key="item._id" :artical="item"></ArticalCard> -->
     </div>
 </template>
 
@@ -15,12 +19,16 @@
         props: {},
         data() {
             return {
-                articals: []
+                articals: [],
+                show: false,
             }
         },
         computed: {},
         async created() {
             await this.getArticals()
+            setTimeout(() => {
+                this.show = !this.show
+            }, 300)
         },
         methods: {
             async getArticals() {

@@ -21,6 +21,11 @@ const routes = [
         path: 'articals',
         name: 'Articals',
         component: ()=>import('../views/Articals.vue'),
+      },
+      {
+        path: 'post',
+        name: 'PostArtical',
+        component: ()=>import('../views/PostArtical.vue')
       }
     ],
     // route level code-splitting

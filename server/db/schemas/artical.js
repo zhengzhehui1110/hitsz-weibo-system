@@ -30,6 +30,10 @@ const artical = new Schema({
         type: String,
         default: ''
     },
+    pic: {
+        type: String,
+        default: '',
+    }
 })
 
 module.exports = artical;
