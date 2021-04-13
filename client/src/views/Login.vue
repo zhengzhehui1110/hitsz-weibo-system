@@ -136,8 +136,7 @@
         computed: {},
         created() {
             // test
-            // this.$toast.success('test toast')
-            this.axios.get('users/test')
+            // console.log(sessionStorage);
         },
         methods: {
             passwordToggle() { // 切换密码显示
@@ -150,11 +149,13 @@
             async submitLogin() { // 提交登录
                 if (!await this.$refs.login.validate()) return
                 // console.log('check log in', check);
-                if (!await this.axios.post(this.$url.user.logIn, this.loginData)) return
+                let res = await this.axios.post(this.$url.user.logIn, this.loginData)
+                if (!res) return
                 // 登陆成功，跳转到主页
+                this.$user.setInfo(res.data.data) // 用户信息存储在sessionStorage
                 this.$refs.login.clear()
-                this.$router.push({
-                    name: 'Home'
+                this.$router.push({ // 跳转到首页，默认先展示全部动态页
+                    path: 'home/articals'
                 })
             },
             async submitSignUp() { // 提交注册
@@ -164,6 +165,12 @@
                 if (!await this.axios.post(this.$url.user.signUp, this.signUpData)) return
                 this.$toast.success('注册成功')
                 this.$refs.sign_up.clear()
+                this.signUpData = {
+                    userName: '',
+                    email: '',
+                    mobile: '',
+                    password: '',
+                }
                 this.isLogin = 0
             },
         },
@@ -190,7 +197,7 @@
     .content {
         position: absolute;
         width: 80%;
-        height: 60%;
+        height: 65%;
         left: 0;
         right: 0;
         top: 0;

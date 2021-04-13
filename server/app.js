@@ -22,9 +22,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 路由
-var indexRouter = require('./routes/index');
+var articalRouter = require('./routes/artical');
 var usersRouter = require('./routes/users');
-app.use('/', indexRouter);
+app.use('/artical', articalRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

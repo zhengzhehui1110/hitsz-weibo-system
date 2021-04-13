@@ -18,10 +18,12 @@ const User = new Schema({
         enum: ['M', 'F']
     },
 	cover_pic: {
-        type: String
+        type: String,
+        default: ''
     },
 	avatar: {
-        type: String
+        type: String,
+        default: ''
     },
     email: {
         type: String, 
@@ -51,6 +53,10 @@ const User = new Schema({
         required: [true, '密码不能为空'], 
         default:'12345678'
     },
+    state: {
+        type: Boolean,
+        default: false,
+    }
 })
 
 module.exports = User;//导出

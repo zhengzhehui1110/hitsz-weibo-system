@@ -34,5 +34,10 @@ export const url = { // 后端请求url路由名称集合
         signUp: 'users/signup',
         logIn: 'users/login',
         editInfo: '',
+        exit: 'users/exit'
+    },
+    artical: {
+        post: 'artical/post',
+        getArticalsByUser: 'artical/getArticalsByUser',
     }
 }

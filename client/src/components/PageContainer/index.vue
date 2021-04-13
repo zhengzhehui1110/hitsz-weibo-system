@@ -39,13 +39,17 @@
         methods: {
             async quit() { // 退出登录
                 // console.log(this.$confirm)
-                await this.$confirm('确认退出？', 'Confirm').then(({
+                await this.$confirm('确认退出？', 'Confirm').then(async ({
                     result,
                 }) => {
                     // console.log(result);
+                    result &&
+                        this.axios.post(this.$url.user.exit, this.$user.getInfo())
                     result && this.$router.replace({
                         name: 'Login'
                     })
+                    this.$user.setInfo('') // 退出登录后清楚本地用户信息
+
                 })
 
             },
