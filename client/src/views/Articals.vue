@@ -1,8 +1,9 @@
 <template>
     <div>
-        <mu-container>
-            <!-- <h1>articals</h1> -->
-        </mu-container>
+        <mu-scale-transition>
+            <ArticalCard v-if="!articals.length && show" :artical="defaultArtical" :isActionAllow="false"></ArticalCard>
+
+        </mu-scale-transition>
         <mu-scale-transition v-for="item in articals" :key="item._id">
             <ArticalCard v-show="show" :artical="item"></ArticalCard>
 
@@ -12,6 +13,13 @@
 </template>
 
 <script>
+    const DEFAULT_ARTICAL = { // 首页没有动态时的显示内容
+        text: '快来发布第一条动态吧~',
+        avatar: '',
+        authorName: '一个好人',
+        postTime: '刚刚',
+        pic: '',
+    }
     export default {
         name: 'Articals',
         components: {},
@@ -23,7 +31,11 @@
                 show: false,
             }
         },
-        computed: {},
+        computed: {
+            defaultArtical() {
+                return DEFAULT_ARTICAL
+            },
+        },
         async created() {
             await this.getArticals()
             setTimeout(() => {
@@ -33,6 +45,7 @@
         methods: {
             async getArticals() {
                 let userInfo = this.$user.getInfo()
+                // userInfo._id = '60753a970862a540f0dbf952'
                 console.log('查询用户文章：', userInfo);
                 let res = await this.axios.post(this.$url.artical.getArticalsByUser, userInfo)
                 this.articals = (res && res.data && res.data.data) || []
@@ -42,5 +55,5 @@
 </script>
 
 <style lang="less" scoped>
-
+    .default_artical {}
 </style>

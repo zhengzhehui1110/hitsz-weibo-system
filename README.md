@@ -20,3 +20,6 @@ CS架构的简易版微博
 - express
 - nodemon
 - cors
+- mongoose
+- mongodb
+

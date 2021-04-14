@@ -33,10 +33,22 @@
 
             <mu-list>
                 <mu-list-item button>
-                    <mu-list-item-title>Menu Item 1</mu-list-item-title>
+                    <mu-list-item-action>
+                        <mu-icon value="settings"></mu-icon>
+                    </mu-list-item-action>
+                    <mu-list-item-title>设置</mu-list-item-title>
                 </mu-list-item>
                 <mu-list-item button>
-                    <mu-list-item-title>Menu Item 2</mu-list-item-title>
+                    <mu-list-item-action>
+                        <mu-icon value="search"></mu-icon>
+                    </mu-list-item-action>
+                    <mu-list-item-title>搜索</mu-list-item-title>
+                </mu-list-item>
+                <mu-list-item button @click="quit">
+                    <mu-list-item-action>
+                        <mu-icon value="exit_to_app"></mu-icon>
+                    </mu-list-item-action>
+                    <mu-list-item-title>退出</mu-list-item-title>
                 </mu-list-item>
                 <!-- <mu-list-item  @click="open = false" button>
         <mu-list-item-title>Close</mu-list-item-title>
@@ -103,7 +115,7 @@
     .blank {
         height: 56px;
         opacity: 0;
-        margin: 0 0 10px;
+        // margin: 0 0 10px;
     }
 
     .index_drawer {

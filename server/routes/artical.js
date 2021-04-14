@@ -35,11 +35,11 @@ router.post('/post', async (req, res, next)=>{
 
 // 查询某个用户的动态
 router.post('/getArticalsByUser', async (req, res, next)=>{
-    // 首先查看用户是否已登录
+    // 首先查看用户是否存在
     var userInfo = req.body
     console.log(userInfo);
-    var user = await isUserExist(userInfo._id)
-    if(user && user.state){
+    var user = await isUserExist(userInfo._id || userInfo.userId)
+    if(user){
         var articals = await Artical.find(
             {
                 authorId: userInfo._id
@@ -50,13 +50,13 @@ router.post('/getArticalsByUser', async (req, res, next)=>{
             }
         )
         console.log('get articals:', userInfo, articals);
-        if(articals) {
+        // if(articals) {
             errHandler(null, articals, res)
-        }
-        else errHandler('查询失败', articals, res, '查询失败')
+        // }
+        // else errHandler('查询失败', articals, res, '查询失败')
     }
     
-    else errHandler('未登录', articals, res, '未登录')
+    else errHandler('用户不存在', articals, res, '用户不存在')
 })
 
 module.exports = router;

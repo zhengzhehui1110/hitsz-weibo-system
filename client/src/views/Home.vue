@@ -7,7 +7,7 @@
     <mu-bottom-nav :value.sync="shift" shift color="white" class="bottom_nav" @change="navigateTo(shift)">
       <mu-bottom-nav-item value="Articals" title="首页" icon="home"></mu-bottom-nav-item>
       <mu-bottom-nav-item value="PostArtical" title="发动态" icon="create"></mu-bottom-nav-item>
-      <mu-bottom-nav-item value="my" title="我的" icon="books"></mu-bottom-nav-item>
+      <mu-bottom-nav-item value="Person" title="我的" icon="person"></mu-bottom-nav-item>
     </mu-bottom-nav>
   </div>
 </template>
@@ -29,7 +29,7 @@
     },
     methods: {
       navigateTo(pageName) {
-        this.$router.push({
+        this.$router.replace({
           name: pageName
         })
       }

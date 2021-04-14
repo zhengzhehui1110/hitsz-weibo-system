@@ -3,6 +3,8 @@ var router = express.Router();
 var User = require('../db/models/user')
 var errHandler = require('../global/errHandler')
 var changeUserState = require('../db/handler/changeUserState')
+var isUserExist = require('../db/handler/queryUserById')
+
 
 router.get('/test', function(req, res, next) {
   errHandler(!req, '网络测试正常', res)
@@ -55,6 +57,17 @@ router.post('/exit', async (req,res,next)=>{
   console.log('user exit:', userInfo);
   var user = await changeUserState(userInfo._id, false) // 用户状态改为下线
   errHandler(!user, user, res)
+})
+
+// 查询某个用户的具体信息
+router.post('/query', async (req,res,next)=>{
+  var user = await isUserExist(req.body.userId || req.body._id)
+  if (user) {
+    user.password = '****' // 避免暴露用户的密码
+    errHandler(null, user, res)
+  }
+  else errHandler('查无此人', null, res, '查无此人')
+
 })
 
 module.exports = router;

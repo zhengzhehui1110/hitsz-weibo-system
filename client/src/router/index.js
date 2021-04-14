@@ -26,7 +26,12 @@ const routes = [
         path: 'post',
         name: 'PostArtical',
         component: ()=>import('../views/PostArtical.vue')
-      }
+      },
+      {
+        path: 'person',
+        name: 'Person',
+        component: ()=>import('../views/Person.vue'),
+      },
     ],
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

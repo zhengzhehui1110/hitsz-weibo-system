@@ -37,7 +37,7 @@ const User = new Schema({
         type: String,
         min: 0, 
         max: 100, 
-        default:''
+        default:'这是一个好人'
     },
     mobile: {
         type: String, 
