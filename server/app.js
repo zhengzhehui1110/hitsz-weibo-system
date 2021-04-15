@@ -24,8 +24,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 路由
 var articalRouter = require('./routes/artical');
 var usersRouter = require('./routes/users');
+var commentRouter = require('./routes/comment');
+
 app.use('/artical', articalRouter);
 app.use('/users', usersRouter);
+app.use('/comment', commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

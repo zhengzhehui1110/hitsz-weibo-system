@@ -47,9 +47,12 @@
                 let userInfo = this.$user.getInfo()
                 // userInfo._id = '60753a970862a540f0dbf952'
                 console.log('查询用户文章：', userInfo);
-                let res = await this.axios.post(this.$url.artical.getArticalsByUser, userInfo)
+                let res = await this.axios.post(this.$url.artical.getArticalsByUser, {
+                    userId: userInfo._id
+                })
                 this.articals = (res && res.data && res.data.data) || []
             },
+
         },
     }
 </script>

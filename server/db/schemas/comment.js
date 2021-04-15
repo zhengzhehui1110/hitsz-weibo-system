@@ -7,7 +7,7 @@ const Comment = new Schema({
 	text: {
         type: String,
         min: [1, '评论内容不能为空'],
-        max: [140, '评论过长'],
+        max: [50, '评论过长'],
         required: [true, '评论内容不能为空']
     },
     authorId: {
@@ -30,21 +30,17 @@ const Comment = new Schema({
         type: String,
         default: ''
     },
-    pic: {
-        type: String,
-        default: '',
-    },
     fatherCommentId: { // 父评论
-        type: Schema.Types.ObjectId,
-        default: 0,
+        type: String,
+        default: '0',
     },
     fatherCommentAuthorName: { // 父评论的作者名称
         type: String,
         default: '',
     },
-    fatherArticalId: { // 评论所属的动态
-        type: Schema.Types.ObjectId,
-        required: [true, '评论缺少原文'],
+    articalId: { // 评论所属的动态
+        type: Schema.Types.ObjectId, Number,
+        required: [true, '评论缺少对应的动态'],
     }
 })
 

@@ -26,6 +26,7 @@
     computed: {},
     created() {
       console.log('登录成功:', this.$global.userInfo);
+
     },
     methods: {
       navigateTo(pageName) {

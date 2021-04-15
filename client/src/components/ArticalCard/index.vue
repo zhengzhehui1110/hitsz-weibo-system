@@ -2,7 +2,7 @@
     <div>
         <!-- {{artical}} -->
         <mu-card class="artical_card">
-            <mu-card-header :title="artical.authorName" :sub-title="artical.postTime">
+            <mu-card-header :title="artical.authorName" :sub-title="dateFormat(artical.postTime, 'yyyy-MM-dd hh:mm')">
                 <mu-avatar slot="avatar" @click.stop="toUserPage">
                     <img v-if="artical.avatar" :src="artical.avatar">
                     <mu-icon v-else value="face"></mu-icon>
@@ -22,7 +22,16 @@
                 </mu-button>
             </mu-card-actions>
             <mu-container>
-                <CommentWrapper :showDetail="showDetail"></CommentWrapper>
+                <mu-divider></mu-divider>
+                <!-- 发表评论 -->
+                <mu-container class="comment_input_wrapper">
+                    <mu-text-field v-model="postComment.text" placeholder="留下评论吧~" solo multi-line full-width
+                        :rowsMax="8" :max-length="50" action-icon="done" :action-click="post">
+                    </mu-text-field>
+                </mu-container>
+                <!-- 展示评论 -->
+                <CommentWrapper v-if="showDetail" :aiticalId="artical._id"></CommentWrapper>
+                <mu-button flat small v-if="showDetail" @click="showDetail=!showDetail">收起评论</mu-button>
             </mu-container>
         </mu-card>
 
@@ -46,12 +55,23 @@
         },
         data() {
             return {
-                showDetail: false
+                showDetail: false,
+                postComment: { // 发表评论
+                    text: '',
+                    authorId: this.$user.getInfo()._id,
+                    authorName: this.$user.getInfo().userName,
+                    postTime: '',
+                    articalId: this.artical._id,
+                }
             }
         },
         computed: {
-
+            userInfo() {
+                return this.$user.getInfo()
+            }
         },
+
+        created() {},
         methods: {
             toUserPage() {
                 // 跳转到某个用户的个人主页
@@ -64,7 +84,21 @@
             },
             like(isLike) {
                 console.log('like:', isLike);
-            }
+            },
+            async post() { // 发表评论（不是回复）
+                this.postComment.postTime = Date.now()
+                console.log('发表评论：', this.postComment);
+                await this.axios.post(this.$url.comment.post, this.postComment)
+                this.showDetail = false // 强制刷新评论
+                setImmediate(() => {
+                    this.showDetail = true
+                    this.postComment.text = ''
+                })
+
+            },
+            dateFormat(date, fmt) { // 日期格式化
+                return new Date(date).format(fmt)
+            },
 
         },
     })
@@ -73,5 +107,9 @@
 <style lang="less" scoped>
     .artical_card {
         margin: 10px;
+    }
+
+    .comment_input_wrapper {
+        padding: 10px 0;
     }
 </style>

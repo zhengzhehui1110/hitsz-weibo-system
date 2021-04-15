@@ -40,5 +40,9 @@ export const url = { // 后端请求url路由名称集合
     artical: {
         post: 'artical/post',
         getArticalsByUser: 'artical/getArticalsByUser',
+    },
+    comment: {
+        post: 'comment/post',
+        queryByArtical: 'comment/queryByArtical'
     }
 }

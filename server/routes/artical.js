@@ -42,14 +42,14 @@ router.post('/getArticalsByUser', async (req, res, next)=>{
     if(user){
         var articals = await Artical.find(
             {
-                authorId: userInfo._id
+                authorId: user._id
             }
         ).sort(
             {
                 postTime: -1,
             }
         )
-        console.log('get articals:', userInfo, articals);
+        console.log('get articals:', user, articals);
         // if(articals) {
             errHandler(null, articals, res)
         // }
