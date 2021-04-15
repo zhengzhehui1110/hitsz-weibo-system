@@ -50,13 +50,31 @@ router.post('/getArticalsByUser', async (req, res, next)=>{
             }
         )
         console.log('get articals:', user, articals);
-        // if(articals) {
-            errHandler(null, articals, res)
-        // }
-        // else errHandler('查询失败', articals, res, '查询失败')
+        errHandler(null, articals, res)
+
     }
     
     else errHandler('用户不存在', articals, res, '用户不存在')
+})
+
+// 按内容查询动态
+router.post('/getArticalsByText', async(req, res, next) => {
+    var exp = req.body.exp.toString()
+    exp = new RegExp(exp, 'i')
+    console.log('exp', exp);
+    var articals = await Artical.find(
+        {
+            text: exp
+        }
+    ).sort(
+        {
+            postTime: -1
+        }
+    )
+    console.log('get articals:', articals);
+    errHandler(null, articals, res)
+
+
 })
 
 module.exports = router;

@@ -1,32 +1,11 @@
 <template>
     <div class="page">
         <mu-appbar class="app_bar" color="primary" :title="userName" z-depth="5">
-            <!-- <mu-button icon slot="left">
-                <mu-icon value="menu"></mu-icon>
-            </mu-button> -->
-            <!-- <span slot="left">微小博</span> -->
 
-
-
-            <!-- <mu-menu slot="right"> -->
             <mu-button flat icon slot="right" @click.stop="openDrawer=!openDrawer">
                 <mu-icon value="menu"></mu-icon>
             </mu-button>
-            <!-- <mu-list slot="content">
-                    <mu-list-item button>
-                        <mu-icon value="search" color="gray"></mu-icon>
-                        <mu-list-item-content>
-                            <mu-list-item-title @click="toSearchPage">搜索</mu-list-item-title>
-                        </mu-list-item-content>
-                    </mu-list-item>
-                    <mu-list-item button @click="quit">
-                        <mu-icon value="exit_to_app" color="gray"></mu-icon>
-                        <mu-list-item-content>
-                            <mu-list-item-title>退出</mu-list-item-title>
-                        </mu-list-item-content>
-                    </mu-list-item>
-                </mu-list> -->
-            <!-- </mu-menu> -->
+
         </mu-appbar>
 
         <mu-drawer :open.sync="openDrawer" :docked="false" class="index_drawer">
@@ -38,7 +17,7 @@
                     </mu-list-item-action>
                     <mu-list-item-title>设置</mu-list-item-title>
                 </mu-list-item>
-                <mu-list-item button>
+                <mu-list-item button @click="toPage('Search')">
                     <mu-list-item-action>
                         <mu-icon value="search"></mu-icon>
                     </mu-list-item-action>
@@ -50,9 +29,7 @@
                     </mu-list-item-action>
                     <mu-list-item-title>退出</mu-list-item-title>
                 </mu-list-item>
-                <!-- <mu-list-item  @click="open = false" button>
-        <mu-list-item-title>Close</mu-list-item-title>
-      </mu-list-item> -->
+
             </mu-list>
         </mu-drawer>
         <div class="blank"></div>
@@ -90,7 +67,11 @@
                 })
 
             },
-            toSearchPage() {},
+            toPage(pageName) {
+                this.$router.push({
+                    name: pageName
+                })
+            },
         },
     }
 </script>

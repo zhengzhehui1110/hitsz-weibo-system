@@ -31,7 +31,9 @@
                 </mu-container>
                 <!-- 展示评论 -->
                 <CommentWrapper v-if="showDetail" :aiticalId="artical._id"></CommentWrapper>
-                <mu-button flat small v-if="showDetail" @click="showDetail=!showDetail">收起评论</mu-button>
+                <mu-button style="width:100%" color="primary" flat v-if="showDetail" @click="showDetail=!showDetail">
+                    <mu-icon value="expand_less"></mu-icon>
+                </mu-button>
             </mu-container>
         </mu-card>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- {{comment}} -->
+        <!-- 本组件已包含子评论模块 -->
         <mu-list textline="two-line">
             <mu-list-item nested open :ripple="false" button>
 
