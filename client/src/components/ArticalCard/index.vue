@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- {{artical}} -->
+        <!-- {{artical._id}} -->
         <mu-card class="artical_card">
             <mu-card-header :title="artical.authorName" :sub-title="dateFormat(artical.postTime, 'yyyy-MM-dd hh:mm')">
                 <mu-avatar slot="avatar" @click.stop="toUserPage">
@@ -30,7 +30,7 @@
                     </mu-text-field>
                 </mu-container>
                 <!-- 展示评论 -->
-                <CommentWrapper v-if="showDetail" :aiticalId="artical._id"></CommentWrapper>
+                <CommentWrapper v-if="showDetail" :articalId="artical._id"></CommentWrapper>
                 <mu-button style="width:100%" color="primary" flat v-if="showDetail" @click="showDetail=!showDetail">
                     <mu-icon value="expand_less"></mu-icon>
                 </mu-button>
@@ -89,6 +89,7 @@
             },
             async post() { // 发表评论（不是回复）
                 this.postComment.postTime = Date.now()
+                this.postComment.articalId = this.artical._id
                 console.log('发表评论：', this.postComment);
                 await this.axios.post(this.$url.comment.post, this.postComment)
                 this.showDetail = false // 强制刷新评论

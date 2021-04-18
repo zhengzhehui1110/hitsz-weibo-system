@@ -20,7 +20,7 @@
         components: {},
         mixins: [],
         props: {
-            aiticalId: {
+            articalId: {
                 type: String,
                 require: true
             },
@@ -53,7 +53,7 @@
             async queryComments() {
                 // test comment
                 let res = await this.axios.post(this.$url.comment.queryByArtical, {
-                    _id: this.aiticalId
+                    _id: this.articalId
                 })
                 this.comments = (res.data && res.data.data) || []
             }

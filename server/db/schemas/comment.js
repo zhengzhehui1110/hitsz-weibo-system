@@ -23,7 +23,7 @@ const Comment = new Schema({
     },
     postTime: {
         type: Date,
-        require: true,
+        required: true,
         default: Date.now()
     },
     avatar: {

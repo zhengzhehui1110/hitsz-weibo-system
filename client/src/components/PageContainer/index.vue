@@ -11,18 +11,27 @@
         <mu-drawer :open.sync="openDrawer" :docked="false" class="index_drawer">
 
             <mu-list>
-                <mu-list-item button>
+                <mu-list-item button @click="toPage('Friends')">
                     <mu-list-item-action>
-                        <mu-icon value="settings"></mu-icon>
+                        <mu-icon value="group"></mu-icon>
                     </mu-list-item-action>
-                    <mu-list-item-title>设置</mu-list-item-title>
+                    <mu-list-item-title>好友</mu-list-item-title>
                 </mu-list-item>
+
                 <mu-list-item button @click="toPage('Search')">
                     <mu-list-item-action>
                         <mu-icon value="search"></mu-icon>
                     </mu-list-item-action>
                     <mu-list-item-title>搜索</mu-list-item-title>
                 </mu-list-item>
+
+                <mu-list-item button>
+                    <mu-list-item-action>
+                        <mu-icon value="settings"></mu-icon>
+                    </mu-list-item-action>
+                    <mu-list-item-title>设置</mu-list-item-title>
+                </mu-list-item>
+
                 <mu-list-item button @click="quit">
                     <mu-list-item-action>
                         <mu-icon value="exit_to_app"></mu-icon>

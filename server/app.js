@@ -25,10 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var articalRouter = require('./routes/artical');
 var usersRouter = require('./routes/users');
 var commentRouter = require('./routes/comment');
+var followRouter = require('./routes/follow');
 
 app.use('/artical', articalRouter);
 app.use('/users', usersRouter);
 app.use('/comment', commentRouter);
+app.use('/follow', followRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

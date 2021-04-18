@@ -61,6 +61,7 @@ router.post('/post', async (req, res, next)=>{
 // 查询一条动态下的所有评论，包括子评论
 router.post('/queryByArtical', async (req, res, next)=>{
     let articalId = req.body._id
+    console.log(articalId);
     var comments = await Comment.find(
         {
             articalId: articalId,
@@ -71,6 +72,7 @@ router.post('/queryByArtical', async (req, res, next)=>{
             postTime: -1,
         }
     ).lean()
+    console.log('get comments:', comments);
 
     var promises = comments.map(async item=>{
         let children = await Comment.find(

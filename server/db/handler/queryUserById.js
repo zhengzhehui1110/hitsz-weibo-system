@@ -5,7 +5,7 @@ const queryUserById = async (userId)=>{
     // console.log('query user:', userId);
     return await User.findOne({
         _id: userId
-    })
+    }).lean()
 }
 
 module.exports = queryUserById;

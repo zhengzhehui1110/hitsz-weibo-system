@@ -1,6 +1,6 @@
 <template>
     <PageContainer>
-        <div>search</div>
+        <!-- <div>search</div> -->
         <mu-container>
             <mu-text-field v-model="searchWord" full-width :max-length="30" action-icon="search" :action-click="search"
                 placeholder="输入关键词">

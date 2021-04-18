@@ -42,7 +42,12 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: ()=>import('../views/Search.vue')
-  }
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: ()=>import('../views/Friends.vue')
+  },
 ]
 
 const router = new VueRouter({

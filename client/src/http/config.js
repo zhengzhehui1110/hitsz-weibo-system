@@ -45,5 +45,12 @@ export const url = { // 后端请求url路由名称集合
     comment: {
         post: 'comment/post',
         queryByArtical: 'comment/queryByArtical',
+    },
+    follow: {
+        follow: 'follow/followUser',
+        disfollow: 'follow/deleteFollowUser',
+        isFollow: 'follow/isFollow',
+        queryMyFollowee: 'follow/queryFolloweeByUser',
+        queryMyFollower: 'follow/queryFollowerByUser',
     }
 }

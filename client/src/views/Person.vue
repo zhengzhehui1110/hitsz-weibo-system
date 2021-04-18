@@ -1,6 +1,8 @@
 <template>
     <div>
         <mu-paper class="cover_pic_wrap">
+            <mu-button class="follow_btn" small round @click="follow()">{{isFollow?'已':''}}关注</mu-button>
+
             <img class="cover_pic" src="" alt="">
             <mu-paper class="avatar" circle :z-depth="5">
                 <!-- <mu-avatar :size="80"></mu-avatar> -->
@@ -37,6 +39,7 @@
                 articals: [],
                 show: false,
                 userInfo: {},
+                isFollow: false, // 当前页面的用户和本用户是否有关注关系
 
             }
         },
@@ -52,7 +55,9 @@
             }
         },
         async created() {
+            await this.getFollowInfo()
             await this.getArticals()
+
             setTimeout(() => {
                 this.show = !this.show
             }, 300)
@@ -76,6 +81,29 @@
                 this.userInfo = userInfo
                 this.articals = (res && res.data && res.data.data) || []
             },
+            async getFollowInfo() {
+                let res = await this.axios.post(this.$url.follow.isFollow, {
+                    follower: this.$user.getInfo()._id,
+                    followee: this.$route.query._id || this.$user.getInfo()._id,
+                })
+                this.isFollow = res.data.data
+            },
+            async follow() {
+                // console.log(this.userId);
+                if (!this.isFollow) { // 如果是未关注状态，则发送关注请求
+                    await this.axios.post(this.$url.follow.follow, {
+                        follower: this.$user.getInfo()._id,
+                        followee: this.$route.query._id || this.$user.getInfo()._id,
+                    })
+                } else { // 否则发送取消关注请求
+                    await this.axios.post(this.$url.follow.disfollow, {
+                        follower: this.$user.getInfo()._id,
+                        followee: this.$route.query._id || this.$user.getInfo()._id,
+                    })
+                }
+                await this.getFollowInfo()
+
+            }
         },
         watch: {
             userId: {
@@ -83,6 +111,8 @@
                     console.log('change');
                     if (nv != ov) {
                         await this.getArticals()
+                        await this.getFollowInfo()
+
                     }
                 },
                 deep: true
@@ -97,6 +127,13 @@
     .cover_pic_wrap {
         height: 60vw;
         position: relative;
+
+        .follow_btn {
+            position: absolute;
+            right: 0;
+            margin: 10px;
+
+        }
 
         .cover_pic {
             height: 100%;
