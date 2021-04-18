@@ -12,11 +12,11 @@
                 {{artical.text}}
             </mu-card-text>
             <mu-card-actions v-if="isActionAllow">
-                <mu-button icon small color="gray">
-                    <mu-icon value="thumb_up" @click.stop="like()"></mu-icon>
+                <mu-button icon small color="gray" @click.stop="like(true)">
+                    <mu-icon value="thumb_up" :color="isLike===true?'primary':''"></mu-icon>
                 </mu-button>
-                <mu-button icon small color="gray">
-                    <mu-icon value="thumb_down" @click.stop="like()"></mu-icon>
+                <mu-button icon small color="gray" @click.stop="like(false)">
+                    <mu-icon value="thumb_down" :color="isLike===false?'primary':''"></mu-icon>
                 </mu-button>
                 <mu-button flat style="float:right" @click="showDetail=!showDetail">{{showDetail?'收起':'查看'}}评论
                 </mu-button>
@@ -53,7 +53,8 @@
             isActionAllow: {
                 type: Boolean,
                 default: true,
-            }
+            },
+
         },
         data() {
             return {
@@ -64,7 +65,8 @@
                     authorName: this.$user.getInfo().userName,
                     postTime: '',
                     articalId: this.artical._id,
-                }
+                },
+                isLike: undefined,
             }
         },
         computed: {
@@ -73,7 +75,9 @@
             }
         },
 
-        created() {},
+        async created() {
+            await this.queryLike()
+        },
         methods: {
             toUserPage() {
                 // 跳转到某个用户的个人主页
@@ -84,8 +88,22 @@
                     }
                 })
             },
-            like(isLike) {
+            async like(isLike) {
                 console.log('like:', isLike);
+                await this.axios.post(this.$url.like.likeArtical, {
+                    isLike: isLike,
+                    user: this.userInfo._id,
+                    artical: this.artical._id
+                })
+                await this.queryLike()
+            },
+            async queryLike() { // 查询当前用户是否已点赞或踩当前文章
+                let res = await this.axios.post(this.$url.like.query, {
+                    user: this.userInfo._id,
+                    artical: this.artical._id
+                })
+                this.isLike = res.data && res.data.data && res.data.data.isLike
+                console.log('islike:', this.isLike);
             },
             async post() { // 发表评论（不是回复）
                 this.postComment.postTime = Date.now()

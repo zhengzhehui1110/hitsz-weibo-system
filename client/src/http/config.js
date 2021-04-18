@@ -40,7 +40,8 @@ export const url = { // 后端请求url路由名称集合
     artical: {
         post: 'artical/post',
         getArticalsByUser: 'artical/getArticalsByUser',
-        search: 'artical/getArticalsByText'
+        search: 'artical/getArticalsByText',
+        getAll: 'artical/getAll'
     },
     comment: {
         post: 'comment/post',
@@ -52,5 +53,9 @@ export const url = { // 后端请求url路由名称集合
         isFollow: 'follow/isFollow',
         queryMyFollowee: 'follow/queryFolloweeByUser',
         queryMyFollower: 'follow/queryFollowerByUser',
+    },
+    like: {
+        likeArtical: 'like/likeArtical',
+        query: 'like/query',
     }
 }

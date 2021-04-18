@@ -77,4 +77,19 @@ router.post('/getArticalsByText', async(req, res, next) => {
 
 })
 
+
+// 查询全部动态
+router.post('/getAll', async(req, res, next) => {
+    var articals = await Artical.find(
+        {
+        }
+    ).sort(
+        {
+            postTime: -1
+        }
+    )
+    errHandler(null, articals, res)
+
+})
+
 module.exports = router;

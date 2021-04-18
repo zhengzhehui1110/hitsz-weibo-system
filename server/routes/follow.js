@@ -62,12 +62,14 @@ router.post('/isFollow',  async (req, res, next)=> {
 // 查询某个用户所有关注的人
 router.post('/queryFolloweeByUser', async (req, res, next)=> {
     var userId = req.body._id
+    // 先从follow关系表查出该用户关注的用户id
     var result = await Follow.find(
         {
             follower: userId
         }
     ).lean()
     console.log('query followee by user', result)
+    // 根据这些id在用户表里查出每个用户的详细信息
     var promises = result.map(async item=>{
         let userInfo = await isUserExist(item.followee)
         return userInfo
