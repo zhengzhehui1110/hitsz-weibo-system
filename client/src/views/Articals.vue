@@ -17,7 +17,6 @@
         text: '快来发布第一条动态吧~',
         avatar: '',
         authorName: '一个好人',
-        postTime: '刚刚',
         pic: '',
     }
     export default {

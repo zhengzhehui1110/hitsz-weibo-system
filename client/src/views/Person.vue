@@ -26,7 +26,6 @@
         text: '这里空空如也~',
         avatar: '',
         authorName: '一个好人',
-        postTime: '刚刚',
         pic: '',
     }
     export default ({

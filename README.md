@@ -38,3 +38,8 @@ CS架构的简易版微博
 1. 进入server目录，命令行运行`npm i`和`node ./bin/www`
 2. 进入client目录，命令行运行`npm i`和`npm run serve`
 3. 浏览器打开http://localhost:8080
+
+# 效果展示
+
+[b站链接](https://www.bilibili.com/video/BV1hK4y1o71N/)
+

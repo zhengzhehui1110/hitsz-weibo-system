@@ -2,7 +2,8 @@
     <div>
         <!-- {{artical._id}} -->
         <mu-card class="artical_card">
-            <mu-card-header :title="artical.authorName" :sub-title="dateFormat(artical.postTime, 'yyyy-MM-dd hh:mm')">
+            <mu-card-header :title="artical.authorName"
+                :sub-title="artical.postTime?dateFormat(artical.postTime, 'yyyy-MM-dd hh:mm'):'刚刚'">
                 <mu-avatar slot="avatar" @click.stop="toUserPage">
                     <img v-if="artical.avatar" :src="artical.avatar">
                     <mu-icon v-else value="face"></mu-icon>
@@ -24,7 +25,7 @@
             <mu-container>
                 <mu-divider></mu-divider>
                 <!-- 发表评论 -->
-                <mu-container class="comment_input_wrapper">
+                <mu-container class="comment_input_wrapper" v-if="artical._id">
                     <mu-text-field v-model="postComment.text" placeholder="留下评论吧~" solo multi-line full-width
                         :rowsMax="8" :max-length="50" action-icon="done" :action-click="post">
                     </mu-text-field>
